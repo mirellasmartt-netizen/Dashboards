@@ -209,7 +209,7 @@
   .surface-header.blue { background: var(--blue); }
   .surface-header.green { background: var(--green); }
   .surface-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; border: 1px solid var(--border); border-radius: 0 0 8px 8px; overflow: hidden; }
-  .surf-col { border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+  .surf-col { border-right: 1px solid var(--border); }
   .surf-col:last-child { border-right: none; }
   .surf-col-head {
     font-size: 10px; font-weight: 600; letter-spacing: .07em;
@@ -218,7 +218,7 @@
   .surf-col-head.hist { background: #FFFBE6; color: var(--amber); }
   .surf-col-head.now { background: var(--blue-bg); color: var(--blue); }
   .surf-col-head.fut { background: var(--green-bg); color: var(--green); }
-  .surf-col-body { padding: 12px 14px; background: var(--white); flex: 1; }
+  .surf-col-body { padding: 12px 14px; background: var(--white); }
   /* TIMELINE */
   .tl-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
   .tl-col { border-right: 1px solid var(--border); }
@@ -350,6 +350,26 @@
   .tool-meta-row { display: flex; gap: 6px; font-size: 11px; }
   .tool-meta-label { font-weight: 600; color: var(--dark); min-width: 44px; }
   .tool-meta-val { color: var(--mid); }
+  /* IN-FLIGHT WORK */
+  .inflight-table { width: 100%; border-collapse: collapse; font-size: 12px; background: var(--white); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+  .inflight-table th { background: var(--dark); color: var(--white); font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 9px 14px; text-align: left; }
+  .inflight-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); color: var(--mid); vertical-align: middle; line-height: 1.4; }
+  .inflight-table td:last-child { border-right: none; }
+  .inflight-table tr:last-child td { border-bottom: none; }
+  .inflight-table .feat-name { font-weight: 600; color: var(--dark); }
+  .inflight-status { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 9px; border-radius: 12px; white-space: nowrap; }
+  .inflight-status.launched { background: var(--green-bg); color: var(--green); }
+  .inflight-status.vqa { background: var(--purple-bg); color: var(--purple); }
+  .inflight-status.indev { background: var(--blue-bg); color: var(--blue); }
+  .inflight-status.design { background: var(--amber-bg); color: var(--amber); }
+  .meeting-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .meeting-name { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 3px; }
+  .meeting-when { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--purple); margin-bottom: 4px; }
+  .meeting-who { font-size: 11px; color: var(--muted); }
+  .gap-card { background: var(--white); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 8px; padding: 14px 16px; }
+  .gap-label { font-size: 10px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--red); margin-bottom: 4px; }
+  .gap-title { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+  .gap-body { font-size: 12px; color: var(--mid); line-height: 1.6; }
   /* TERM GLOSSARY */
   .term-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--white); }
   .term-row { display: contents; }
@@ -431,7 +451,7 @@
   .enabler-meta-label { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; margin-top: 8px; }
   /* SKP TIERS */
   .tier-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-  .tier-col { border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+  .tier-col { border-right: 1px solid var(--border); }
   .tier-col:last-child { border-right: none; }
   .tier-head { padding: 14px 16px; }
   .tier-head.launch { background: var(--blue-bg); border-bottom: 3px solid var(--blue); }
@@ -439,7 +459,7 @@
   .tier-head.select { background: var(--purple-bg); border-bottom: 3px solid var(--purple); }
   .tier-name { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
   .tier-sub { font-size: 11px; color: var(--mid); }
-  .tier-body { padding: 14px 16px; background: var(--white); flex: 1; }
+  .tier-body { padding: 14px 16px; background: var(--white); }
   .tier-section { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 12px; margin-bottom: 6px; }
   .tier-section:first-child { margin-top: 0; }
   .skp-note { font-size: 11px; color: var(--mid); line-height: 1.5; margin-top: 12px; padding: 10px 14px; background: var(--amber-bg); border-radius: 6px; border-left: 3px solid var(--amber); }
@@ -467,106 +487,10 @@
   }
   .version-tag { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
   .version-note { font-size: 12px; color: var(--mid); }
-
-  /* TEAM ROSTER PANELS */
-  .roster-panel {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 18px 20px;
-    margin-top: 14px;
-  }
-  .roster-title {
-    font-size: 10px; font-weight: 600; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--muted);
-    margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
-  }
-  .roster-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 14px;
-  }
-  .roster-group { }
-  .roster-group-label {
-    font-size: 10px; font-weight: 600; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
-  }
-  .roster-person {
-    display: flex; flex-direction: column;
-    margin-bottom: 7px;
-  }
-  .roster-name { font-size: 12px; font-weight: 500; color: var(--dark); }
-  .roster-role { font-size: 11px; color: var(--muted); }
-  .roster-tenure { font-size: 10px; color: var(--muted); font-style: italic; margin-top: 1px; }
-
-
-
-
-  /* PARTNER NOTES v3 */
-  .pn-wrap{font-size:13px}
-  .pn-tabs{display:flex;gap:6px;margin-bottom:16px}
-  .pn-tab{font-size:12px;padding:5px 14px;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--mid)}
-  .pn-tab.active{background:var(--bg);color:var(--dark);font-weight:500;border-color:#bbb}
-  .pn-ac-outer{position:relative;margin-bottom:16px}
-  .pn-ac-input{width:100%;font-size:13px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--dark);outline:none;box-sizing:border-box}
-  .pn-ac-input:focus{border-color:#999}
-  .pn-drop{display:none;margin-top:2px;background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden}
-  .pn-drop-item{display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;font-size:12px;border-bottom:1px solid var(--border)}
-  .pn-drop-item:last-child{border-bottom:none}
-  .pn-drop-item:hover,.pn-drop-item.focused{background:var(--bg)}
-  .pn-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500}
-  .pn-ac-name{font-weight:500;color:var(--dark)}
-  .pn-ac-sub{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .pn-hl{color:var(--blue)}
-  .pn-drop-add{display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;font-size:12px;color:var(--blue);border-top:1px solid var(--border);font-style:italic}
-  .pn-drop-add:hover{background:var(--bg)}
-  .pn-drop-add-icon{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;background:var(--blue-bg);color:var(--blue)}
-  .pn-profile-card{background:var(--white);border:1px solid var(--border);border-radius:8px;margin-bottom:16px}
-  .pn-ph{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border)}
-  .pn-ph-av{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500}
-  .pn-ph-name{font-size:14px;font-weight:500;color:var(--dark)}
-  .pn-ph-meta{font-size:11px;color:var(--muted);margin-top:2px}
-  .pn-ph-badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
-  .pn-bdg{font-size:10px;font-weight:500;padding:2px 7px;border-radius:20px;background:var(--bg);color:var(--muted)}
-  .pn-bdg-p{background:var(--blue-bg);color:var(--blue)}
-  .pn-new-row{display:flex;gap:8px;align-items:flex-start;padding:10px 14px;border-bottom:1px solid var(--border)}
-  .pn-new-date{font-size:11px;color:var(--muted);white-space:nowrap;padding-top:3px;min-width:78px}
-  .pn-new-ta{flex:1;font-size:12px;resize:none;min-height:58px;line-height:1.5;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--dark);font-family:inherit}
-  .pn-new-ta:focus{outline:none;border-color:#999;background:var(--white)}
-  .pn-add-btn{font-size:12px;font-weight:500;padding:6px 14px;white-space:nowrap;background:var(--dark);color:var(--white);border:none;border-radius:6px;cursor:pointer;align-self:flex-end}
-  .pn-add-btn:hover{background:#333}
-  .pn-entry{display:flex;align-items:flex-start;gap:12px;padding:9px 14px;border-bottom:1px solid var(--border)}
-  .pn-entry:last-child{border-bottom:none}
-  .pn-edate{font-size:11px;color:var(--muted);white-space:nowrap;min-width:78px;padding-top:2px}
-  .pn-etext{flex:1;font-size:12px;color:var(--dark);line-height:1.55}
-  .pn-edel{background:none;border:none;cursor:pointer;padding:0;font-size:16px;color:var(--muted);line-height:1;flex-shrink:0}
-  .pn-edel:hover{color:#c0392b}
-  .pn-none{padding:14px;font-size:12px;color:var(--muted);text-align:center}
-  .pn-empty{padding:2.5rem 0;font-size:12px;color:var(--muted);text-align:center}
-  .pn-all-card{background:var(--white);border:1px solid var(--border);border-radius:8px;margin-bottom:8px}
-  .pn-all-hd{display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer}
-  .pn-all-hd:hover{background:var(--bg)}
-  .pn-all-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500}
-  .pn-all-name{flex:1;font-size:13px;font-weight:500;color:var(--dark)}
-  .pn-all-ct{font-size:11px;color:var(--muted)}
-  .pn-all-ch{font-size:13px;color:var(--muted);transition:transform .15s}
-  .pn-all-ch.open{transform:rotate(180deg)}
-  .pn-all-entries{border-top:1px solid var(--border);display:none}
-  .pn-export-bar{margin-top:20px;padding:13px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-  .pn-export-desc{font-size:12px;color:var(--mid)}
-  .pn-export-btn{font-size:12px;font-weight:500;padding:7px 16px;background:var(--dark);color:var(--white);border:none;border-radius:6px;cursor:pointer}
-  .pn-export-btn:hover{background:#333}
-  .pn-export-btn.secondary{background:transparent;color:var(--dark);border:1px solid var(--border)}
-  .pn-export-btn.secondary:hover{background:var(--bg)}
-  .pn-export-btns{display:flex;gap:8px;flex-wrap:wrap}
-  body.shared-mode #partner-notes{display:none!important}
-  body.shared-mode .pn-nav-items{display:none!important}
-  .shared-banner{display:none;background:var(--blue-bg);border-bottom:1px solid var(--border);padding:8px 40px 8px 240px;font-size:12px;color:var(--blue)}
 </style>
 </head>
 <body>
 
-<div class="shared-banner" id="sharedBanner">&#128100; You're viewing a shared copy of this dashboard. Partner notes are not included.</div>
 <header class="site-header">
   <h1>RDC Client Product Portfolio</h1>
   <div style="display:flex;align-items:center;gap:16px">
@@ -609,9 +533,8 @@
   <a class="nav-link" href="#deprecations">Deprecation Tracker</a>
   <a class="nav-link" href="#dri-map">DRI Map</a>
   <a class="nav-link" href="#revenue-summary">Revenue Summary</a>
-  <div class="nav-label pn-nav-items">My Notes</div>
-  <a class="nav-link pn-nav-items" href="#partner-notes">Partner Notes</a>
   <div class="nav-label">Execution</div>
+  <a class="nav-link" href="#inflight">In-Flight Work</a>
   <a class="nav-link" href="#timeline">FY27 Timeline</a>
   <a class="nav-link" href="#teams">Team Ownership</a>
   <a class="nav-link" href="#risks">Risks</a>
@@ -1258,168 +1181,6 @@
         </div>
       </div>
     </div>
-
-    <div class="roster-panel">
-    <div class="roster-title">&#129489;&#8205;&#128187; RealPro Dashboard &mdash; Team Roster</div>
-    <div class="roster-grid">
-      
-        <div class="roster-group">
-          <div class="roster-group-label">Product</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Erin Bentel</span>
-              <span class="roster-role">Sr Product Manager</span>
-              <span class="roster-tenure">4y 0m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Sean Rowland</span>
-              <span class="roster-role">Lead Product Manager</span>
-              <span class="roster-tenure">1y 2m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Charlie Lehman</span>
-              <span class="roster-role">Lead Product Manager</span>
-              <span class="roster-tenure">0y 4m at Realtor</span>
-            
-            <div class="roster-person">
-              <span class="roster-name">Whitney Perez</span>
-              <span class="roster-role">Director of Product, Customer Experience</span>
-              <span class="roster-tenure">0y 6m at Realtor</span>
-            </div>
-        </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">Design</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Ava DeVoe</span>
-              <span class="roster-role">Director, Product Design</span>
-              <span class="roster-tenure">4y 1m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Sarah Miller</span>
-              <span class="roster-role">Senior Product Designer</span>
-              <span class="roster-tenure">0y 10m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Will Soemargo</span>
-              <span class="roster-role">Senior Product Designer</span>
-              <span class="roster-tenure">4y 8m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Pooja Sheth</span>
-              <span class="roster-role">Product Designer, Sr</span>
-              <span class="roster-tenure">5y 5m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Jon Grimes</span>
-              <span class="roster-role">Product Designer</span>
-              <span class="roster-tenure">0y 9m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Christina Poon</span>
-              <span class="roster-role">Product Designer, Lead</span>
-              <span class="roster-tenure">4y 11m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">Engineer</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Daniel Treiber</span>
-              <span class="roster-role">Dir, Software Engineering</span>
-              <span class="roster-tenure">6y 11m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">James Monsebroten</span>
-              <span class="roster-role">Sr Mgr, Software Engineering</span>
-              <span class="roster-tenure">10y 9m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Jean-Michel Lehker</span>
-              <span class="roster-role">Senior Staff Software Engineer</span>
-              <span class="roster-tenure">4y 3m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Michael Tran</span>
-              <span class="roster-role">Software Eng, Sr Staff</span>
-              <span class="roster-tenure">6y 10m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Naga Kamavarapu</span>
-              <span class="roster-role">Mgr, Software Appl Dev</span>
-              <span class="roster-tenure">9y 7m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Pallavi Namburi</span>
-              <span class="roster-role">Sr Mgr, Software Appl Dev</span>
-              <span class="roster-tenure">8y 1m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Ryan Saathoff</span>
-              <span class="roster-role">Senior Manager of Software Engineering</span>
-              <span class="roster-tenure">0y 9m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Sandhya Karanam</span>
-              <span class="roster-role">Contractor</span>
-              <span class="roster-tenure">4y 4m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Scout Martinelli</span>
-              <span class="roster-role">Software Engineering Manager</span>
-              <span class="roster-tenure">0y 3m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Sonu Sharma</span>
-              <span class="roster-role">Mgr, Software Appl Dev</span>
-              <span class="roster-tenure">10y 9m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">William Ching</span>
-              <span class="roster-role">Staff Software Engineer</span>
-              <span class="roster-tenure">4y 0m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Yang Hu</span>
-              <span class="roster-role">Software Engineer</span>
-              <span class="roster-tenure">3y 11m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">GTM</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Nikhil Kulkarni</span>
-              <span class="roster-role">Lead Go-to-Market Manager</span>
-              <span class="roster-tenure">0y 6m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">QE</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Eric Scott</span>
-              <span class="roster-role">Senior Manager, Quality Engineering</span>
-              <span class="roster-tenure">0y 8m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Praveenkumar Pattar</span>
-              <span class="roster-role">Software Test Engineer, Staff</span>
-              <span class="roster-tenure">9y 0m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">TPM</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Diana Pena</span>
-              <span class="roster-role">Contractor</span>
-              <span class="roster-tenure">1y 7m at Realtor</span>
-            </div>
-        </div>
-    </div>
-  </div>
   </div>
 
   <!-- REALPRO APP -->
@@ -1485,205 +1246,8 @@
     </div>
   </div>
 
-
-    <div class="roster-panel">
-    <div class="roster-title">&#129489;&#8205;&#128187; RealPro App &mdash; Team Roster</div>
-    <div class="roster-grid">
-      
-        <div class="roster-group">
-          <div class="roster-group-label">Product</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Erin Bentel</span>
-              <span class="roster-role">Sr Product Manager</span>
-              <span class="roster-tenure">4y 0m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">James McDade</span>
-              <span class="roster-role">Product Manager</span>
-              <span class="roster-tenure">9y 1m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Sean Rowland</span>
-              <span class="roster-role">Lead Product Manager</span>
-              <span class="roster-tenure">1y 2m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Charlie Lehman</span>
-              <span class="roster-role">Lead Product Manager</span>
-              <span class="roster-tenure">0y 4m at Realtor</span>
-            
-            <div class="roster-person">
-              <span class="roster-name">Whitney Perez</span>
-              <span class="roster-role">Director of Product, Customer Experience</span>
-              <span class="roster-tenure">0y 6m at Realtor</span>
-            </div>
-        </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">Design</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Ava DeVoe</span>
-              <span class="roster-role">Director, Product Design</span>
-              <span class="roster-tenure">4y 1m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Sarah Miller</span>
-              <span class="roster-role">Senior Product Designer</span>
-              <span class="roster-tenure">0y 10m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Will Soemargo</span>
-              <span class="roster-role">Senior Product Designer</span>
-              <span class="roster-tenure">4y 8m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Zeke Skovron</span>
-              <span class="roster-role">Lead Product Designer</span>
-              <span class="roster-tenure">5y 0m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Pooja Sheth</span>
-              <span class="roster-role">Product Designer, Sr</span>
-              <span class="roster-tenure">5y 5m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Jon Grimes</span>
-              <span class="roster-role">Product Designer</span>
-              <span class="roster-tenure">0y 9m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Christina Poon</span>
-              <span class="roster-role">Product Designer, Lead</span>
-              <span class="roster-tenure">4y 11m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">Engineer</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Liz Stranack</span>
-              <span class="roster-role">Mgr, Software Engineering</span>
-              <span class="roster-tenure">4y 1m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Thomas Verry</span>
-              <span class="roster-role">Sr. Staff Software Engineer</span>
-              <span class="roster-tenure">1y 6m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">GTM</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Christine Hale</span>
-              <span class="roster-role">Go-To-Market Manager, Sr Staff</span>
-              <span class="roster-tenure">10y 9m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Dustin Emmerich</span>
-              <span class="roster-role">Lead GTM Manager, Core Client</span>
-              <span class="roster-tenure">4y 7m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Nikhil Kulkarni</span>
-              <span class="roster-role">Lead Go-to-Market Manager</span>
-              <span class="roster-tenure">0y 6m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Samantha Beja</span>
-              <span class="roster-role">Lead Go-to-Market Manager</span>
-              <span class="roster-tenure">0y 6m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">QE</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Eric Scott</span>
-              <span class="roster-role">Senior Manager, Quality Engineering</span>
-              <span class="roster-tenure">0y 8m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">TPM</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Diana Pena</span>
-              <span class="roster-role">Contractor</span>
-              <span class="roster-tenure">1y 7m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">Success / Account</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Jenny Giblin</span>
-              <span class="roster-role">VP - Core Client</span>
-              <span class="roster-tenure">3y 5m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Tyler Carr</span>
-              <span class="roster-role">Senior Director, Customer Success</span>
-              <span class="roster-tenure">10y 9m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">XFN Stakeholder</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Ashley Adams</span>
-              <span class="roster-role">Director of Software Engineering</span>
-              <span class="roster-tenure">1y 2m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Courtney Langley</span>
-              <span class="roster-role">Product Manager, Sr</span>
-              <span class="roster-tenure">3y 8m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Jennifer Owens</span>
-              <span class="roster-role">Senior B2B Marketing Manager, Buyer & Seller Programs</span>
-              <span class="roster-tenure">1y 1m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Julie Brody</span>
-              <span class="roster-role">Product Designer Lead</span>
-              <span class="roster-tenure">4y 11m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Kara Jones</span>
-              <span class="roster-role">Director, B2B Marketing</span>
-              <span class="roster-tenure">1y 3m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Mariana Trammell</span>
-              <span class="roster-role">Senior Product Manager, Market VIP</span>
-              <span class="roster-tenure">10y 9m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Marivi Carlton</span>
-              <span class="roster-role">Senior Manager of Product Design</span>
-              <span class="roster-tenure">1y 2m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Stephanie Bassey</span>
-              <span class="roster-role">Software Engineer</span>
-              <span class="roster-tenure">2y 11m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Timothy Ballew</span>
-              <span class="roster-role">Lead Experience Researcher, Core</span>
-              <span class="roster-tenure">2y 6m at Realtor</span>
-            </div>
-        </div>
-    </div>
-  </div>
-  </div>
-
   <!-- ONLINE STORE -->
-  <div class="section" id="store" style="margin-top:48px">
+  <div class="section" id="store">
     <div class="section-title">Online Store & Billing</div>
     <div class="surface-wrap">
       <div class="surface-desc">The self-serve growth engine — where clients discover, compare, and purchase products confidently without the sales team. Primary vehicle for growing attach rate and store revenue.</div>
@@ -1749,144 +1313,6 @@
         </div>
       </div>
     </div>
-
-    <div class="roster-panel">
-    <div class="roster-title">&#129489;&#8205;&#128187; Online Store &mdash; Team Roster</div>
-    <div class="roster-grid">
-      
-        <div class="roster-group">
-          <div class="roster-group-label">Product</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">James McDade</span>
-              <span class="roster-role">Product Manager</span>
-              <span class="roster-tenure">9y 1m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Sean Rowland</span>
-              <span class="roster-role">Lead Product Manager</span>
-              <span class="roster-tenure">1y 2m at Realtor</span>
-            
-            <div class="roster-person">
-              <span class="roster-name">Whitney Perez</span>
-              <span class="roster-role">Director of Product, Customer Experience</span>
-              <span class="roster-tenure">0y 6m at Realtor</span>
-            </div>
-        </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">Design</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Ava DeVoe</span>
-              <span class="roster-role">Director, Product Design</span>
-              <span class="roster-tenure">4y 1m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Lauren Lang</span>
-              <span class="roster-role">Senior Product Designer</span>
-              <span class="roster-tenure">1y 6m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">Engineer</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Naga Kamavarapu</span>
-              <span class="roster-role">Mgr, Software Appl Dev</span>
-              <span class="roster-tenure">9y 7m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Pallavi Tammana</span>
-              <span class="roster-role">Software Appl Dev, Staff</span>
-              <span class="roster-tenure">10y 1m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Carolina Sanchez</span>
-              <span class="roster-role">Contractor</span>
-              <span class="roster-tenure">0y 8m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">QE</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Jose Colon Solivan</span>
-              <span class="roster-role">Software Test Engineer</span>
-              <span class="roster-tenure">0y 11m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">TPM</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Christian Moreno</span>
-              <span class="roster-role">Contractor</span>
-              <span class="roster-tenure">0y 10m at Realtor</span>
-            </div>
-        </div>
-    </div>
-  </div>
-
-    <div class="roster-panel">
-    <div class="roster-title">&#129489;&#8205;&#128187; Billing &mdash; Team Roster</div>
-    <div class="roster-grid">
-      
-        <div class="roster-group">
-          <div class="roster-group-label">Engineer</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Akarsha K N</span>
-              <span class="roster-role">Contractor</span>
-              <span class="roster-tenure">6y 3m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Daniel Treiber</span>
-              <span class="roster-role">Dir, Software Engineering</span>
-              <span class="roster-tenure">6y 11m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">James Monsebroten</span>
-              <span class="roster-role">Sr Mgr, Software Engineering</span>
-              <span class="roster-tenure">10y 9m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Kavya K.N.</span>
-              <span class="roster-role">Contractor</span>
-              <span class="roster-tenure">6y 7m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Pallavi Tammana</span>
-              <span class="roster-role">Software Appl Dev, Staff</span>
-              <span class="roster-tenure">10y 1m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Sandhya Karanam</span>
-              <span class="roster-role">Contractor</span>
-              <span class="roster-tenure">4y 4m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Sonu Sharma</span>
-              <span class="roster-role">Mgr, Software Appl Dev</span>
-              <span class="roster-tenure">10y 9m at Realtor</span>
-            </div>
-        </div>
-        <div class="roster-group">
-          <div class="roster-group-label">QE</div>
-          
-            <div class="roster-person">
-              <span class="roster-name">Jose Colon Solivan</span>
-              <span class="roster-role">Software Test Engineer</span>
-              <span class="roster-tenure">0y 11m at Realtor</span>
-            </div>
-            <div class="roster-person">
-              <span class="roster-name">Praveenkumar Pattar</span>
-              <span class="roster-role">Software Test Engineer, Staff</span>
-              <span class="roster-tenure">9y 0m at Realtor</span>
-            </div>
-        </div>
-    </div>
-  </div>
   </div>
 
   <!-- TIMELINE -->
@@ -2586,9 +2012,164 @@
     </div>
   </div>
 
+  <!-- IN-FLIGHT WORK -->
+  <div class="section" id="inflight">
+    <div class="section-title">In-Flight Design Work — MVIP/RCC Migration</div>
+
+    <div class="ux-intro" style="margin-bottom:16px">
+      <div class="ux-intro-title">Status as of June 2026</div>
+      <div class="ux-intro-body">Almost all migrated features are now in flight. The core design work is largely complete. A Beta client feedback loop is in progress led by Tim Ballew (Research). Active effort underway to identify areas to improve features before Q3 portal deprecation. <strong>Key risk:</strong> The biggest remaining risk is not feature design — it's data. Clients have duplicate accounts, missing Party IDs / Broker Op IDs, and outdated contact data, making linking FocusFire and Salesforce accounts technically complex. <strong>Design gap:</strong> No design plan yet exists for communicating legacy portal deprecation to clients.</div>
+    </div>
+
+    <div class="section-title" style="font-size:13px;margin-bottom:8px">Feature Tracker — MVIP/RCC Post-Beta</div>
+    <table class="inflight-table" style="margin-bottom:20px">
+      <thead>
+        <tr>
+          <th style="width:210px">Feature</th>
+          <th style="width:100px">Target</th>
+          <th style="width:140px">Designer(s)</th>
+          <th style="width:130px">Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="feat-name">Priority Callback Leads</span></td>
+          <td>May 19 (done)</td>
+          <td>Julie → Christina</td>
+          <td><span class="inflight-status launched">Launched</span></td>
+          <td>Post-Beta feature. Now live.</td>
+        </tr>
+        <tr>
+          <td><span class="feat-name">Homepage priority actions</span></td>
+          <td>FY26 Q4</td>
+          <td>Pooja Sheth</td>
+          <td><span class="inflight-status vqa">VQA → Release</span></td>
+          <td>VQA complete. About to be released.</td>
+        </tr>
+        <tr>
+          <td><span class="feat-name">Agent invitation</span></td>
+          <td>FY27 Q1</td>
+          <td>Pooja (RPD) · Will (RPA)</td>
+          <td><span class="inflight-status vqa">VQA</span></td>
+          <td>Both web and mobile in VQA.</td>
+        </tr>
+        <tr>
+          <td><span class="feat-name">ISA role</span></td>
+          <td>FY27 Q1</td>
+          <td>Julie → Christina</td>
+          <td><span class="inflight-status indev">In Development</span></td>
+          <td>Transitions to Christina on her return.</td>
+        </tr>
+        <tr>
+          <td><span class="feat-name">Super admin role</span></td>
+          <td>FY27 Q1</td>
+          <td>Jon Grimes</td>
+          <td><span class="inflight-status indev">In Development</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span class="feat-name">CRM integration</span></td>
+          <td>FY27 Q1</td>
+          <td>Pooja Sheth</td>
+          <td><span class="inflight-status indev">In Development</span></td>
+          <td>Part of DAS / multi-CRM foundation work.</td>
+        </tr>
+        <tr>
+          <td><span class="feat-name">New Broker / Team Lead signup</span></td>
+          <td>FY27 Q1</td>
+          <td>Jon Grimes</td>
+          <td><span class="inflight-status indev">In Development</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span class="feat-name">Agent removal</span></td>
+          <td>FY27 Q1</td>
+          <td>Julie → Christina</td>
+          <td><span class="inflight-status indev">In Development</span></td>
+          <td>Transitions to Christina on her return.</td>
+        </tr>
+        <tr>
+          <td><span class="feat-name">Prospect &amp; PCL assignment / status updates</span></td>
+          <td>FY27 Q1</td>
+          <td>Julie → Jon</td>
+          <td><span class="inflight-status indev">In Development</span></td>
+          <td>Transitions to Jon.</td>
+        </tr>
+        <tr>
+          <td><span class="feat-name">Buyer lead detail activity tab</span></td>
+          <td>FY27 Q1</td>
+          <td>Jon Grimes</td>
+          <td><span class="inflight-status indev">In Development</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span class="feat-name">Multi-transaction status updates</span></td>
+          <td>FY27 Q1</td>
+          <td>Jon Grimes</td>
+          <td><span class="inflight-status design">Design WIP</span></td>
+          <td>Still in design — not yet in development.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title" style="font-size:13px;margin-bottom:8px">Market VIP Live Transfer Agent Assignment</div>
+    <div class="ux-intro" style="margin-bottom:20px">
+      <div class="ux-intro-title">Brief Context</div>
+      <div class="ux-intro-body"><strong>Problem:</strong> As live transfer volume increases, MVIP clients have limited control over which agent receives a live transfer lead. Dispatch-to-assign rate: 40% → target &gt;50%.<br><br><strong>Scope:</strong> Discovery across the full ~600 MVIP client base before any build commitment. H2 build is conditional on Q2 test results.<br><br><strong>PM:</strong> Charlie Lehman &nbsp;·&nbsp; <strong>Design:</strong> Transitions to Christina Poon on her return &nbsp;·&nbsp; <strong>Phase:</strong> Q1 discovery complete; Q2 hypothesis testing<br><br><strong>Key risk:</strong> Agent assignment logic lives in FocusFire, which is on the deprecation path. Eng coordination with Daniel and eng leadership needed to confirm which system to build in for test vs. scale.</div>
+    </div>
+
+    <div class="section-title" style="font-size:13px;margin-bottom:8px">Open Design Gaps</div>
+    <div class="cards-2" style="margin-bottom:20px">
+      <div class="gap-card">
+        <div class="gap-label">No Owner</div>
+        <div class="gap-title">Legacy Portal Deprecation Communication</div>
+        <div class="gap-body">No design plan exists for communicating the deprecation of the Opcity Broker Portal and MVIP Portal to clients. This work needs a design owner. Likely transitions to Christina Poon on her return, but needs an explicit decision and timeline before then.</div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-label">Ambiguous</div>
+        <div class="gap-title">Designer Assignments Post-Reorg</div>
+        <div class="gap-body">Whitney Perez's shift from initiative-based to outcome-based PM ownership (Activate / Engage / Grow) is not yet fully mapped to designer assignments. Designers are feeling the uncertainty. Design-level roadmaps — translating product roadmaps into what each designer is actually building and when — are a high-priority early task.</div>
+      </div>
+    </div>
+
+    <div class="section-title" style="font-size:13px;margin-bottom:8px">Key Recurring Meetings — RealPro Dashboard</div>
+    <div class="cards-3">
+      <div class="meeting-card">
+        <div class="meeting-name">Front-End Eng Standup (Tech Mod)</div>
+        <div class="meeting-when">Mon–Thu · 10am CT</div>
+        <div class="meeting-who">Audience: Front-end engineering</div>
+      </div>
+      <div class="meeting-card">
+        <div class="meeting-name">Buyer Client Partner Design Sync</div>
+        <div class="meeting-when">Biweekly Tuesday · 1pm CT</div>
+        <div class="meeting-who">Audience: Frontline / GTM</div>
+      </div>
+      <div class="meeting-card">
+        <div class="meeting-name">UWP Requirements Review</div>
+        <div class="meeting-when">Weekly Tuesday · 2pm CT</div>
+        <div class="meeting-who">Audience: Engineering</div>
+      </div>
+      <div class="meeting-card">
+        <div class="meeting-name">RPD Weekly Design Sync</div>
+        <div class="meeting-when">Weekly Friday · 1:30pm CT</div>
+        <div class="meeting-who">Audience: Design team</div>
+      </div>
+      <div class="meeting-card">
+        <div class="meeting-name">Client × Design Systems</div>
+        <div class="meeting-when">Weekly Friday · 1pm CT</div>
+        <div class="meeting-who">Audience: Design systems</div>
+      </div>
+    </div>
+  </div>
+
   <!-- TEAMS -->
   <div class="section" id="teams">
     <div class="section-title">Team Ownership Model — Outcome Based</div>
+    <div class="ux-intro" style="margin-bottom:16px">
+      <div class="ux-intro-title">Reorg Context — Whitney Perez, Director of Product</div>
+      <div class="ux-intro-body">Whitney recently shifted the PM structure from initiative-based to outcome-based ownership. The three frames are Activation (Sean Rowland), Engagement (Erin Bentel), and Grow (James McDade). <strong>This is not fully baked.</strong> Details are still being worked through, and there is active ambiguity about how designer assignments map to the new PM structure. Designers are not pushing back on the direction — they're pushing back on the lack of scope clarity. Ava is managing the design allocation decision. Creating design-level roadmaps from the product roadmaps is a high-priority early task for the new design manager.</div>
+    </div>
     <div class="cards-3">
       <div class="team-card" style="border-left:3px solid var(--purple)">
         <div class="team-role">Capability 1</div>
@@ -2635,10 +2216,18 @@
           <li>Distinct Devices</li>
         </ul>
       </div>
+      <div class="risk-card">
+        <div class="risk-type migration">Design Gaps</div>
+        <div class="risk-title">Unowned design work</div>
+        <ul class="bullets">
+          <li><strong>Legacy portal deprecation comms</strong> — no design owner for communicating Opcity Broker Portal / MVIP Portal sunset to clients; needs assignment before Q3</li>
+          <li><strong>Designer assignments post-reorg</strong> — Activate/Engage/Grow PM structure not yet mapped to designer scope; design-level roadmaps needed urgently</li>
+          <li><strong>Jon's focus post-migration</strong> — once MVIP work transitions to Christina, Jon's next area needs a deliberate decision</li>
+          <li><strong>Live Transfer Agent Assignment build system</strong> — assignment logic lives in FocusFire (deprecation path); eng must confirm target system before H2 build</li>
+        </ul>
+      </div>
     </div>
   </div>
-
-  <!-- RISKS -->
   <div class="section" id="risks">
     <div class="section-title">Key Risks & Dependencies</div>
     <div class="cards-3">
@@ -3339,6 +2928,51 @@
       </tbody>
     </table>
     <div class="dri-note">Eng and Design leads shown where named in source documents. Blank cells indicate leads not named in available materials. Update directly in the HTML as ownership evolves.</div>
+
+    <div class="section-title" style="font-size:13px;margin-top:20px;margin-bottom:10px">Cross-Functional Partner Notes</div>
+    <div class="cards-2">
+      <div class="finding-card" style="border-left:3px solid var(--purple)">
+        <div class="finding-surface" style="color:var(--purple)">Product</div>
+        <div class="finding-title">Whitney Perez — Director of Product, Customer Experience</div>
+        <div class="finding-quote">"Whitney is new and actively building her strategic vision. She thinks big and has a strong philosophical direction. She will need support tactically executing the vision across a complex, multi-surface product space."</div>
+        <ul class="bullets">
+          <li>Your primary product partner</li>
+          <li>Led the initiative → outcome-based PM reorg (Activate / Engage / Grow)</li>
+          <li>Designers like Pooja and Will can be real partners here — bringing tenured clarity and structure to ambiguity</li>
+          <li>Ava is managing design allocation decisions in the interim</li>
+        </ul>
+      </div>
+      <div class="finding-card" style="border-left:3px solid var(--blue)">
+        <div class="finding-surface" style="color:var(--blue)">Product</div>
+        <div class="finding-title">Erin Bentel — Sr. PM, RealPro Dashboard (moving to Engage)</div>
+        <div class="finding-quote">"Erin operates at scale and can move fast. She usually grounds work in clear, measurable outcomes and user-problem definition. She indexes on design partnership early and often."</div>
+        <ul class="bullets">
+          <li>Already very good about bringing design partners in early</li>
+          <li>Recommend setting regular time with her in your first month to get current on RPD and MVIP/RCC migration state</li>
+        </ul>
+      </div>
+      <div class="finding-card" style="border-left:3px solid var(--amber)">
+        <div class="finding-surface" style="color:var(--amber)">Engineering</div>
+        <div class="finding-title">James Monsebroten — Engineering Manager</div>
+        <div class="finding-quote">"25 years at RDC — he carries the institutional knowledge of the whole platform. This makes him invaluable and frequently overextended."</div>
+        <ul class="bullets">
+          <li>When he's not in a meeting, critical product and technical context gets missed — tech leads often can't or won't fill the gap</li>
+          <li>James is aware of this pattern and actively trying to bring tech leads into the room more</li>
+          <li>He has asked to be flagged when tech lead feedback isn't sufficient so he can coach them</li>
+          <li><strong>Make sure James is in the room for anything high-stakes. When he's not, flag it — don't work around it.</strong></li>
+        </ul>
+      </div>
+      <div class="finding-card" style="border-left:3px solid var(--teal)">
+        <div class="finding-surface" style="color:var(--teal)">Program Management</div>
+        <div class="finding-title">Dee (Diana) Pena — Technical Program Manager</div>
+        <div class="finding-quote">"Dee keeps the RealPro Dashboard train on the tracks."</div>
+        <ul class="bullets">
+          <li>First person to turn to for keeping design and engineering in lockstep</li>
+          <li>Many front- and back-end engineering stakeholders on this surface — Dee ensures the right people are in the right rooms</li>
+          <li>Loop her in any time you need to schedule a cross-functional review</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <!-- REVENUE SUMMARY -->
@@ -3468,279 +3102,6 @@
     </table>
     <div class="dri-note" style="margin-top:8px">Revenue figures drawn from product briefs and roadmap decks. Some figures are quarterly targets, others annual. ACV figures for Unity are annualized contract values, not cash received in quarter. Cells marked "—" indicate targets not specified in available source documents.</div>
   </div>
-
-
-  <!-- PARTNER NOTES -->
-  <div class="section" id="partner-notes">
-    <div class="section-title">Partner Notes &#8212; Private 1:1 Context</div>
-    <div class="pn-wrap">
-      <div class="pn-tabs">
-        <button class="pn-tab active" id="pnTabAdd" onclick="pnTab('add')">Add note</button>
-        <button class="pn-tab" id="pnTabAll" onclick="pnTab('all')">All notes</button>
-      </div>
-
-      <div id="pnAdd">
-        <div class="pn-ac-outer">
-          <input class="pn-ac-input" id="pnIn" type="text" autocomplete="off" placeholder="Start typing a name&#8230;" />
-          <div class="pn-drop" id="pnDrop"></div>
-        </div>
-        <div id="pnCard" style="display:none">
-          <div class="pn-profile-card">
-            <div class="pn-ph">
-              <div class="pn-ph-av" id="pnAv"></div>
-              <div><div class="pn-ph-name" id="pnName"></div><div class="pn-ph-meta" id="pnMeta"></div><div class="pn-ph-badges" id="pnBadges"></div></div>
-            </div>
-            <div class="pn-new-row">
-              <span class="pn-new-date" id="pnDate"></span>
-              <textarea class="pn-new-ta" id="pnTa" rows="3" placeholder="What did you learn in this 1:1? Preferences, context, communication style&#8230;"></textarea>
-              <button class="pn-add-btn" id="pnAddBtn">+ Add</button>
-            </div>
-            <div id="pnList"></div>
-          </div>
-        </div>
-        <div id="pnHint" class="pn-empty">Search for a team member above to view or add notes.</div>
-      </div>
-
-      <div id="pnAll" style="display:none">
-        <div id="pnAllList"></div>
-        <div id="pnAllEmpty" class="pn-empty" style="display:none">No notes yet &#8212; add your first note in the Add note tab.</div>
-      </div>
-
-      <div class="pn-export-bar">
-        <span class="pn-export-desc">&#128274; Notes are private to you. Export a personal backup with notes, or a clean shared copy without them.</span>
-        <div class="pn-export-btns">
-          <button class="pn-export-btn secondary" id="pnShareBtn">&#128101; Export for sharing</button>
-          <button class="pn-export-btn" id="pnExpBtn">&#8595; Export with notes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-  (function(){
-    var PP=[{"name": "Ava DeVoe", "email": "ava.devoe@move.com", "title": "Director, Product Design", "projects": ["Online Store", "RealPro App", "RealPro Dashboard"], "type": "Design", "start": "2022-04-20", "tenure": "4y 1m", "notes": "Design leadership noted across App, Dashboard, and Online Store portfolio."}, {"name": "Sarah Miller", "email": "sarah.miller@realtor.com", "title": "Senior Product Designer", "projects": ["RealPro App", "RealPro Dashboard"], "type": "Design", "start": "2025-07-28", "tenure": "0y 10m", "notes": "Named on UpNest/LTK migration into RealPro App."}, {"name": "Will Soemargo", "email": "will.soemargo@move.com", "title": "Senior Product Designer", "projects": ["RealPro App", "RealPro Dashboard"], "type": "Design", "start": "2021-09-08", "tenure": "4y 8m", "notes": "Named designer on RealPro App."}, {"name": "Zeke Skovron", "email": "zeke.skovron@opcity.com", "title": "Lead Product Designer", "projects": ["RealPro App"], "type": "Design", "start": "2021-05-05", "tenure": "5y 0m", "notes": "Named designer on RealPro App."}, {"name": "Akarsha K N", "email": "akarsha.kn.contractor@move.com", "title": "Contractor", "projects": ["Billing"], "type": "Engineer", "start": "2020-02-27", "tenure": "6y 3m", "notes": ""}, {"name": "Daniel Treiber", "email": "daniel.treiber@realtor.com", "title": "Dir, Software Engineering", "projects": ["Billing", "RealPro Dashboard"], "type": "Engineer", "start": "2019-06-07", "tenure": "6y 11m", "notes": ""}, {"name": "James Monsebroten", "email": "james.monsebroten@move.com", "title": "Sr Mgr, Software Engineering", "projects": ["Billing", "RealPro Dashboard"], "type": "Engineer", "start": "2015-08-20", "tenure": "10y 9m", "notes": ""}, {"name": "Jean-Michel Lehker", "email": "jeanmichel.lehker@move.com", "title": "Senior Staff Software Engineer", "projects": ["RealPro Dashboard"], "type": "Engineer", "start": "2022-02-08", "tenure": "4y 3m", "notes": ""}, {"name": "Kavya K.N.", "email": "kavya.kn.contractor@move.com", "title": "Contractor", "projects": ["Billing"], "type": "Engineer", "start": "2019-11-04", "tenure": "6y 7m", "notes": ""}, {"name": "Liz Stranack", "email": "liz.stranack@move.com", "title": "Mgr, Software Engineering", "projects": ["RealPro App"], "type": "Engineer", "start": "2022-04-21", "tenure": "4y 1m", "notes": ""}, {"name": "Michael Tran", "email": "michael.tran@opcity.com", "title": "Software Eng, Sr Staff", "projects": ["RealPro Dashboard"], "type": "Engineer", "start": "2019-07-17", "tenure": "6y 10m", "notes": ""}, {"name": "Naga Kamavarapu", "email": "naga.kamavarapu@move.com", "title": "Mgr, Software Appl Dev", "projects": ["Online Store", "RealPro Dashboard"], "type": "Engineer", "start": "2016-10-31", "tenure": "9y 7m", "notes": ""}, {"name": "Pallavi Namburi", "email": "pallavi.namburi@move.com", "title": "Sr Mgr, Software Appl Dev", "projects": ["RealPro Dashboard"], "type": "Engineer", "start": "2018-04-18", "tenure": "8y 1m", "notes": ""}, {"name": "Pallavi Tammana", "email": "pallavi.tammana@move.com", "title": "Software Appl Dev, Staff", "projects": ["Billing", "Online Store"], "type": "Engineer", "start": "2016-04-13", "tenure": "10y 1m", "notes": ""}, {"name": "Ryan Saathoff", "email": "ryan.saathoff@realtor.com", "title": "Senior Manager of Software Engineering", "projects": ["RealPro Dashboard"], "type": "Engineer", "start": "2025-08-21", "tenure": "0y 9m", "notes": ""}, {"name": "Sandhya Karanam", "email": "sandhya.karanam@move.com", "title": "Contractor", "projects": ["Billing", "RealPro Dashboard"], "type": "Engineer", "start": "2022-01-11", "tenure": "4y 4m", "notes": ""}, {"name": "Scout Martinelli", "email": "scout.martinelli@realtor.com", "title": "Software Engineering Manager", "projects": ["RealPro Dashboard"], "type": "Engineer", "start": "2026-02-20", "tenure": "0y 3m", "notes": ""}, {"name": "Sonu Sharma", "email": "sonu.sharma@move.com", "title": "Mgr, Software Appl Dev", "projects": ["Billing", "RealPro Dashboard"], "type": "Engineer", "start": "2015-08-20", "tenure": "10y 9m", "notes": ""}, {"name": "Thomas Verry", "email": "thomas.verry@realtor.com", "title": "Sr. Staff Software Engineer", "projects": ["RealPro App"], "type": "Engineer", "start": "2024-11-08", "tenure": "1y 6m", "notes": ""}, {"name": "William Ching", "email": "william.ching@move.com", "title": "Staff Software Engineer", "projects": ["RealPro Dashboard"], "type": "Engineer", "start": "2022-05-13", "tenure": "4y 0m", "notes": ""}, {"name": "Yang Hu", "email": "yang.hu@move.com", "title": "Software Engineer", "projects": ["RealPro Dashboard"], "type": "Engineer", "start": "2022-06-27", "tenure": "3y 11m", "notes": ""}, {"name": "Christine Hale", "email": "christine.hale@realtor.com", "title": "Go-To-Market Manager, Sr Staff", "projects": ["RealPro App"], "type": "GTM", "start": "2015-08-20", "tenure": "10y 9m", "notes": "Named for knowledge management and training on related SFDC work."}, {"name": "Dustin Emmerich", "email": "dustin.emmerich@realtor.com", "title": "Lead GTM Manager, Core Client", "projects": ["RealPro App"], "type": "GTM", "start": "2021-10-11", "tenure": "4y 7m", "notes": "Named stakeholder on UpNest/LTK to RealPro App migration sprint."}, {"name": "Nikhil Kulkarni", "email": "nikhil.kulkarni@realtor.com", "title": "Lead Go-to-Market Manager", "projects": ["RealPro App", "RealPro Dashboard"], "type": "GTM", "start": "2025-12-01", "tenure": "0y 6m", "notes": "Named GTM lead across App/Dash migration work."}, {"name": "Samantha Beja", "email": "samantha.beja@realtor.com", "title": "Lead Go-to-Market Manager", "projects": ["RealPro App"], "type": "GTM", "start": "2025-11-18", "tenure": "0y 6m", "notes": "Named on adjacent premium/core client GTM tied to migration work."}, {"name": "Erin Bentel", "email": "erin.bentel@move.com", "title": "Sr Product Manager", "projects": ["RealPro App", "RealPro Dashboard"], "type": "Product", "start": "2022-05-20", "tenure": "4y 0m", "notes": "Referenced in broader RPD/RPA planning."}, {"name": "James McDade", "email": "james.mcdade@opcity.com", "title": "Product Manager", "projects": ["RealPro App", "Online Store"], "type": "Product", "start": "2017-04-28", "tenure": "9y 1m", "notes": "Named PM on RealPro App project page."}, {"name": "Eric Scott", "email": "eric.scott@realtor.com", "title": "Senior Manager, Quality Engineering", "projects": ["RealPro App", "RealPro Dashboard"], "type": "QE", "start": "2025-09-17", "tenure": "0y 8m", "notes": "QA Manager on RealPro Dashboard; QA listed on RealPro App project page"}, {"name": "Jose Colon Solivan", "email": "jose.colonsolivan@realtor.com", "title": "Software Test Engineer", "projects": ["Billing", "Online Store"], "type": "QE", "start": "2025-06-12", "tenure": "0y 11m", "notes": "QA owner/tester on Products & Billing Center tickets and active on Online Store QA issues"}, {"name": "Praveenkumar Pattar", "email": "praveenkumar.pattar@move.com", "title": "Software Test Engineer, Staff", "projects": ["Billing", "RealPro Dashboard"], "type": "QE", "start": "2017-06-03", "tenure": "9y 0m", "notes": "E2E QA Lead on RealPro Dashboard; included in Billing for Products & Billing Center tech review"}, {"name": "Jenny Giblin", "email": "jenny.giblin@realtor.com", "title": "VP - Core Client", "projects": ["RealPro App"], "type": "Success / Account", "start": "2022-12-19", "tenure": "3y 5m", "notes": "Named stakeholder on RealPro App onboarding/guidance sprint."}, {"name": "Tyler Carr", "email": "tyler.carr@realtor.com", "title": "Senior Director, Customer Success", "projects": ["RealPro App"], "type": "Success / Account", "start": "2015-08-20", "tenure": "10y 9m", "notes": "Named stakeholder on RealPro App onboarding/guidance sprint."}, {"name": "Christian Moreno", "email": "christian.moreno.contractor@realtor.com", "title": "Contractor", "projects": ["Online Store"], "type": "TPM", "start": "2025-07-25", "tenure": "0y 10m", "notes": "Documented as TPM on Online Store page"}, {"name": "Diana Pena", "email": "diana.pena.contractor@realtor.com", "title": "Contractor", "projects": ["RealPro App", "RealPro Dashboard"], "type": "TPM", "start": "2024-10-16", "tenure": "1y 7m", "notes": "Dashboard TPM; RealPro App listed as interim TPM in project page"}, {"name": "Ashley Adams", "email": "ashley.adams@realtor.com", "title": "Director of Software Engineering", "projects": ["RealPro App"], "type": "XFN Stakeholder", "start": "2025-03-24", "tenure": "1y 2m", "notes": "Named stakeholder on UpNest/LTK to RealPro App migration sprint."}, {"name": "Courtney Langley", "email": "courtney.langley@realtor.com", "title": "Product Manager, Sr", "projects": ["RealPro App"], "type": "XFN Stakeholder", "start": "2022-10-04", "tenure": "3y 8m", "notes": "Named stakeholder on UpNest/LTK to RealPro App migration sprint."}, {"name": "Jennifer Owens", "email": "jennifer.owens@realtor.com", "title": "Senior B2B Marketing Manager, Buyer & Seller Programs", "projects": ["RealPro App"], "type": "XFN Stakeholder", "start": "2025-04-23", "tenure": "1y 1m", "notes": "Named stakeholder on RealPro App onboarding/guidance sprint."}, {"name": "Julie Brody", "email": "julie.brody@move.com", "title": "Product Designer Lead", "projects": ["RealPro App"], "type": "XFN Stakeholder", "start": "2021-07-01", "tenure": "4y 11m", "notes": "Named stakeholder on RealPro App onboarding/guidance sprint."}, {"name": "Kara Jones", "email": "kara.jones@realtor.com", "title": "Director, B2B Marketing", "projects": ["RealPro App"], "type": "XFN Stakeholder", "start": "2025-02-26", "tenure": "1y 3m", "notes": "Named stakeholder on RealPro App onboarding/guidance sprint."}, {"name": "Mariana Trammell", "email": "mariana.trammell@move.com", "title": "Senior Product Manager, Market VIP", "projects": ["RealPro App"], "type": "XFN Stakeholder", "start": "2015-08-20", "tenure": "10y 9m", "notes": "Named stakeholder on RealPro App onboarding/guidance sprint."}, {"name": "Marivi Carlton", "email": "marivi.carlton@realtor.com", "title": "Senior Manager of Product Design", "projects": ["RealPro App"], "type": "XFN Stakeholder", "start": "2025-04-01", "tenure": "1y 2m", "notes": "Named stakeholder on UpNest/LTK to RealPro App migration sprint."}, {"name": "Stephanie Bassey", "email": "stephanie.bassey@realtor.com", "title": "Software Engineer", "projects": ["RealPro App"], "type": "XFN Stakeholder", "start": "2023-06-28", "tenure": "2y 11m", "notes": "Named stakeholder on RealPro App onboarding/guidance sprint."}, {"name": "Timothy Ballew", "email": "timothy.ballew@realtor.com", "title": "Lead Experience Researcher, Core", "projects": ["RealPro App"], "type": "XFN Stakeholder", "start": "2023-11-30", "tenure": "2y 6m", "notes": "Named stakeholder on UpNest/LTK to RealPro App migration sprint."}, {"name": "Sean Rowland", "email": "sean.rowland@realtor.com", "title": "Lead Product Manager", "projects": ["RealPro App", "RealPro Dashboard", "Online Store"], "type": "Product", "start": "2025-04-01", "tenure": "1y 2m", "notes": "Added per user request."}, {"name": "Pooja Sheth", "email": "pooja.sheth@realtor.com", "title": "Product Designer, Sr", "projects": ["RealPro App", "RealPro Dashboard"], "type": "Design", "start": "2021-01-02", "tenure": "5y 5m", "notes": "Added per user request."}, {"name": "Lauren Lang", "email": "lauren.lang@realtor.com", "title": "Senior Product Designer", "projects": ["Online Store"], "type": "Design", "start": "2024-11-14", "tenure": "1y 6m", "notes": "Added per user request."}, {"name": "Carolina Sanchez", "email": "carolina.sanchez.contractor@realtor.com", "title": "Contractor", "projects": ["Online Store"], "type": "Engineer", "start": "2025-09-10", "tenure": "0y 8m", "notes": "Enterprise Systems contractor reporting into software development."}, {"name": "Jon Grimes", "email": "jon.grimes@realtor.com", "title": "Product Designer", "projects": ["RealPro App", "RealPro Dashboard"], "type": "Design", "start": "2025-08-21", "tenure": "0y 9m", "notes": "Added per user request."}, {"name": "Christina Poon", "email": "christina.poon@opcity.com", "title": "Product Designer, Lead", "projects": ["RealPro App", "RealPro Dashboard"], "type": "Design", "start": "2021-06-30", "tenure": "4y 11m", "notes": "Added per user request."}, {"name": "Charlie Lehman", "email": "charlie.lehman@realtor.com", "title": "Lead Product Manager", "projects": ["RealPro App", "RealPro Dashboard"], "type": "Product", "start": "2026-01-12", "tenure": "0y 4m", "notes": "Added per user request."}, {"name": "Whitney Perez", "title": "Director of Product, Customer Experience", "projects": ["RealPro Dashboard", "RealPro App", "Online Store"], "type": "Product", "start": "", "tenure": "0y 6m", "notes": ""}];
-    var TBG={"Design":"#EEEDFE","Engineer":"#E6F1FB","GTM":"#FAEEDA","Product":"#E1F5EE","QE":"#FAECE7","Success / Account":"#FBEAF0","TPM":"#F1EFE8","XFN Stakeholder":"#EAF3DE"};
-    var TFC={"Design":"#534AB7","Engineer":"#185FA5","GTM":"#854F0B","Product":"#0F6E56","QE":"#993C1D","Success / Account":"#993356","TPM":"#5F5E5A","XFN Stakeholder":"#3B6D11"};
-    var NK='__pnv3__';
-    var BAKED_NOTES={};
-    var cur=null,matches=[],idx=-1;
-
-    function today(){return new Date().toISOString().slice(0,10);}
-    function fmt(d){var p=d.split('-'),m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return m[+p[1]-1]+' '+p[2]+', '+p[0];}
-    function ini(n){return n.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();}
-    function x(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-    function load(){var n=Object.assign({},BAKED_NOTES);try{Object.assign(n,JSON.parse(localStorage.getItem(NK)||'{}'));}catch(e){}return n;}
-    function save(n){try{localStorage.setItem(NK,JSON.stringify(n));}catch(e){}}
-
-    var inp=document.getElementById('pnIn');
-    var drop=document.getElementById('pnDrop');
-
-
-
-    inp.addEventListener('input',function(){
-      var q=inp.value.trim().toLowerCase();
-      idx=-1;
-      if(!q){drop.style.display='none';matches=[];return;}
-      matches=PP.filter(function(p){return p.name.toLowerCase().indexOf(q)>=0;}).slice(0,8);
-      render();
-    });
-
-    inp.addEventListener('keydown',function(e){
-      var total=matches.length+(matches.length===0&&inp.value.trim()?1:0);
-      if(e.key==='ArrowDown'){e.preventDefault();idx=Math.min(idx+1,total-1);render();}
-      else if(e.key==='ArrowUp'){e.preventDefault();idx=Math.max(idx-1,0);render();}
-      else if(e.key==='Enter'){
-        if(idx>=0&&idx<matches.length){pick(idx);}
-        else if(inp.value.trim()){pickManual(inp.value.trim());}
-      }
-      else if(e.key==='Escape'){drop.style.display='none';}
-    });
-
-    document.addEventListener('click',function(e){
-      if(!e.target.closest('#pnIn')&&!e.target.closest('#pnDrop')) drop.style.display='none';
-    });
-
-    function render(){
-      if(!matches.length&&!inp.value.trim()){drop.style.display='none';return;}
-      var q=inp.value.trim().toLowerCase();
-      var re=new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
-      var rows='';
-      for(var i=0;i<matches.length;i++){
-        var p=matches[i];
-        var hi=x(p.name).replace(re,'<span class="pn-hl">$1</span>');
-        rows+='<div class="pn-drop-item'+(i===idx?' focused':'')+'" data-i="'+i+'">'
-          +'<div class="pn-av" style="background:'+TBG[p.type]+';color:'+TFC[p.type]+'">'+ini(p.name)+'</div>'
-          +'<div><div class="pn-ac-name">'+hi+'</div><div class="pn-ac-sub">'+x(p.type)+' · '+x(p.projects.join(', '))+'</div></div>'
-          +'</div>';
-      }
-      var rawName=inp.value.trim();
-      var exactMatch=matches.some(function(p){return p.name.toLowerCase()===rawName.toLowerCase();});
-      if(rawName&&!exactMatch){
-        var isAddFocused=(idx===matches.length);
-        rows+='<div class="pn-drop-add'+(isAddFocused?' focused':'')+'" data-manual="1">'
-          +'<div class="pn-drop-add-icon">+</div>'
-          +'<span>Add note for &ldquo;'+x(rawName)+'&rdquo;</span>'
-          +'</div>';
-      }
-      drop.innerHTML=rows;
-      drop.style.display=rows?'block':'none';
-      drop.querySelectorAll('.pn-drop-item').forEach(function(el){
-        el.addEventListener('mousedown',function(e){e.preventDefault();pick(+el.getAttribute('data-i'));});
-      });
-      var addEl=drop.querySelector('.pn-drop-add');
-      if(addEl){
-        addEl.addEventListener('mousedown',function(e){e.preventDefault();pickManual(rawName);});
-      }
-    }
-
-    function pick(i){
-      var p=matches[i];
-      openProfile(p.name,p.title,p.type,p.projects);
-    }
-
-    function pickManual(name){
-      openProfile(name,'','','');
-    }
-
-    function openProfile(name,title,type,projects){
-      inp.value=name;
-      drop.style.display='none';
-      cur={name:name,title:title,type:type,projects:typeof projects==='string'?[]:projects};
-      document.getElementById('pnHint').style.display='none';
-      document.getElementById('pnCard').style.display='block';
-      var av=document.getElementById('pnAv');
-      av.style.background=TBG[type]||'#E5E5E5';
-      av.style.color=TFC[type]||'#555';
-      av.textContent=ini(name);
-      document.getElementById('pnName').textContent=name;
-      document.getElementById('pnMeta').textContent=title||'Added manually';
-      var badges=type?'<span class="pn-bdg">'+x(type)+'</span>':'';
-      if(projects&&projects.length) badges+=projects.map(function(pr){return '<span class="pn-bdg pn-bdg-p">'+x(pr)+'</span>';}).join('');
-      document.getElementById('pnBadges').innerHTML=badges;
-      document.getElementById('pnDate').textContent=fmt(today());
-      document.getElementById('pnTa').value='';
-      listEntries();
-    }
-
-    function listEntries(){
-      if(!cur)return;
-      var n=load();
-      var ee=(n[cur.name]||[]).slice().sort(function(a,b){return b.date.localeCompare(a.date);});
-      var el=document.getElementById('pnList');
-      if(!ee.length){el.innerHTML='<div class="pn-none">No notes yet for this person.</div>';return;}
-      el.innerHTML=ee.map(function(e,i){
-        return '<div class="pn-entry">'
-          +'<span class="pn-edate">'+fmt(e.date)+'</span>'
-          +'<span class="pn-etext">'+x(e.text).replace(/\n/g,'<br>')+'</span>'
-          +'<button class="pn-edel" data-i="'+i+'">&times;</button>'
-          +'</div>';
-      }).join('');
-      el.querySelectorAll('.pn-edel').forEach(function(btn){
-        btn.addEventListener('click',function(){delEntry(+btn.getAttribute('data-i'),ee);});
-      });
-    }
-
-    function delEntry(di,ee){
-      var n=load();
-      var entry=ee[di];
-      n[cur.name]=(n[cur.name]||[]).filter(function(e){return !(e.date===entry.date&&e.text===entry.text);});
-      if(!n[cur.name].length) delete n[cur.name];
-      save(n);listEntries();
-    }
-
-    document.getElementById('pnAddBtn').addEventListener('click',function(){
-      var t=document.getElementById('pnTa').value.trim();
-      if(!t||!cur)return;
-      var n=load();
-      if(!n[cur.name])n[cur.name]=[];
-      n[cur.name].push({date:today(),text:t});
-      save(n);
-      document.getElementById('pnTa').value='';
-      listEntries();
-    });
-
-    function pnTab(tab){
-      document.getElementById('pnAdd').style.display=tab==='add'?'block':'none';
-      document.getElementById('pnAll').style.display=tab==='all'?'block':'none';
-      document.getElementById('pnTabAdd').className='pn-tab'+(tab==='add'?' active':'');
-      document.getElementById('pnTabAll').className='pn-tab'+(tab==='all'?' active':'');
-      if(tab==='all') renderAll();
-    }
-    window.pnTab=pnTab;
-
-    function renderAll(){
-      var n=load();
-      var names=Object.keys(n).filter(function(k){return n[k]&&n[k].length;});
-      var list=document.getElementById('pnAllList');
-      var empty=document.getElementById('pnAllEmpty');
-      if(!names.length){list.innerHTML='';empty.style.display='block';return;}
-      empty.style.display='none';
-      list.innerHTML=names.map(function(name){
-        var p=PP.filter(function(q){return q.name===name;})[0]||{name:name,type:'',projects:[]};
-        var ee=(n[name]||[]).slice().sort(function(a,b){return b.date.localeCompare(a.date);});
-        var cid='pac_'+name.replace(/[^a-zA-Z0-9]/g,'_');
-        return '<div class="pn-all-card">'
-          +'<div class="pn-all-hd" data-cid="'+cid+'">'
-          +'<div class="pn-all-av" style="background:'+(TBG[p.type]||'#eee')+';color:'+(TFC[p.type]||'#555')+'">'+ini(name)+'</div>'
-          +'<span class="pn-all-name">'+x(name)+'</span>'
-          +'<span class="pn-all-ct">'+ee.length+' note'+(ee.length!==1?'s':'')+'</span>'
-          +'<span class="pn-all-ch" id="ch_'+cid+'">&#8964;</span>'
-          +'</div>'
-          +'<div class="pn-all-entries" id="'+cid+'">'
-          +ee.map(function(e){return '<div class="pn-entry"><span class="pn-edate">'+fmt(e.date)+'</span><span class="pn-etext">'+x(e.text).replace(/\n/g,'<br>')+'</span></div>';}).join('')
-          +'</div></div>';
-      }).join('');
-      list.querySelectorAll('.pn-all-hd').forEach(function(hd){
-        hd.addEventListener('click',function(){
-          var cid=hd.getAttribute('data-cid');
-          var el=document.getElementById(cid);
-          var ch=document.getElementById('ch_'+cid);
-          var open=el.style.display==='none'||!el.style.display;
-          el.style.display=open?'block':'none';
-          if(ch)ch.className='pn-all-ch'+(open?' open':'');
-        });
-      });
-    }
-
-    document.getElementById('pnExpBtn').addEventListener('click',function(){
-      var n=load();
-      var src=document.documentElement.outerHTML;
-      src=src.replace(/var BAKED_NOTES=\{[^}]*\};/,'var BAKED_NOTES='+JSON.stringify(n)+';');
-      var b=new Blob([src],{type:'text/html'});
-      var a=document.createElement('a');
-      a.href=URL.createObjectURL(b);
-      a.download='RDC_Portfolio_Dashboard_Notes.html';
-      a.click();
-    });
-
-    document.getElementById('pnShareBtn').addEventListener('click',function(){
-      var src=document.documentElement.outerHTML;
-      // Strip the entire partner-notes section
-      src=src.replace(/<div class="section" id="partner-notes"[\s\S]*?<\/div>\s*\n\s*<script id="pn-script"[\s\S]*?<\/script>/,'');
-      // Strip the nav items
-      src=src.replace(/<div class="nav-label pn-nav-items">.*?<\/div>\s*\n\s*<a class="nav-link pn-nav-items".*?<\/a>/,'');
-      // Strip the shared banner script trigger (so banner doesn't show on open)
-      src=src.replace(/pnCheckShared\(\);/g,'');
-      // Add shared mode marker — activate banner on open
-      var bodyReplace='<body onload="var sb=document.getElementById(\'sharedBanner\');if(sb)sb.style.display=\'block\'">';src=src.replace('<body>',bodyReplace);
-      var b=new Blob([src],{type:'text/html'});
-      var a=document.createElement('a');
-      a.href=URL.createObjectURL(b);
-      a.download='RDC_Portfolio_Dashboard_Shared.html';
-      a.click();
-    });
-
-    function pnCheckShared(){
-      if(window.location.search.indexOf('shared')>=0){
-        document.body.classList.add('shared-mode');
-        var banner=document.getElementById('sharedBanner');
-        if(banner) banner.style.display='block';
-      }
-    }
-    pnCheckShared();
-
-  })();
-  </script>
 
 </main>
 
