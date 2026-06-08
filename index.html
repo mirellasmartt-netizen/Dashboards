@@ -39,17 +39,18 @@
   .site-header {
     background: var(--white);
     border-bottom: 1px solid var(--border);
-    padding: 0 40px;
+    padding: 0 24px;
     position: sticky;
     top: 0;
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 56px;
+    height: 48px;
+    flex-shrink: 0;
   }
   .site-header h1 {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--dark);
     letter-spacing: .04em;
@@ -57,52 +58,62 @@
   }
   .header-meta {
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     color: var(--muted);
   }
   .header-badge {
     background: var(--red-light);
     color: var(--red);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
-    padding: 3px 10px;
+    padding: 2px 8px;
     border-radius: 20px;
+  }
+  /* LAYOUT */
+  .layout {
+    display: flex;
+    align-items: flex-start;
   }
   /* NAV */
   .side-nav {
-    position: fixed;
-    left: 0; top: 56px; bottom: 0;
-    width: 200px;
+    position: sticky;
+    top: 48px;
+    height: calc(100vh - 48px);
+    width: 190px;
+    min-width: 190px;
     background: var(--white);
     border-right: 1px solid var(--border);
-    padding: 20px 0;
+    padding: 14px 0 20px;
     overflow-y: auto;
+    flex-shrink: 0;
   }
   .nav-label {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 600;
     letter-spacing: .08em;
     text-transform: uppercase;
     color: var(--muted);
-    padding: 0 20px;
-    margin-bottom: 6px;
-    margin-top: 16px;
+    padding: 0 14px;
+    margin-bottom: 3px;
+    margin-top: 12px;
   }
   .nav-label:first-child { margin-top: 0; }
   .nav-link {
     display: block;
-    font-size: 13px;
+    font-size: 11px;
     color: var(--mid);
-    padding: 6px 20px;
+    padding: 3px 14px;
     text-decoration: none;
     border-left: 2px solid transparent;
     transition: all .15s;
+    line-height: 1.5;
   }
   .nav-link:hover { color: var(--red); background: var(--red-light); border-left-color: var(--red); }
   .nav-link.active { color: var(--red); font-weight: 500; border-left-color: var(--red); }
   /* MAIN */
   .main {
-    margin-left: 200px;
+    flex: 1;
+    min-width: 0;
     padding: 32px 40px 80px;
     max-width: 1100px;
   }
@@ -499,6 +510,7 @@
   </div>
 </header>
 
+<div class="layout">
 <nav class="side-nav">
   <div class="nav-label">Overview</div>
   <a class="nav-link" href="#northstar">North Star</a>
@@ -3104,6 +3116,7 @@
   </div>
 
 </main>
+</div><!-- end .layout -->
 
 <script>
   const links = document.querySelectorAll('.nav-link');
