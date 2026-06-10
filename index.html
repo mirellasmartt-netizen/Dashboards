@@ -1193,6 +1193,50 @@
         </div>
       </div>
     </div>
+
+    <!-- SEAMLESS TRANSITION CALLOUT -->
+    <div class="card accent-purple" style="margin-top:16px">
+      <div class="card-eyebrow">Migration Strategy — Phase 1</div>
+      <div class="card-title red">Seamless Transition: ProDash → RPD</div>
+      <div style="font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:12px">
+        To prevent duplicate work during the migration period, Engineering has enabled shared authentication between ProDash and RPD. New client experiences are built <em>only</em> in RPD, then surfaced inside ProDash via same-tab navigation — clients never realize they've crossed platforms.
+      </div>
+      <div class="cards-3" style="gap:10px;margin-bottom:12px">
+        <div style="background:var(--bg);border-radius:6px;padding:12px">
+          <div style="font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">User Flow</div>
+          <ul class="bullets">
+            <li>Client clicks an action in ProDash (e.g. "Edit Promotion")</li>
+            <li>RPD page opens in the same tab, visually replacing ProDash UI</li>
+            <li>On Save / Cancel / Back → client is returned to originating ProDash page</li>
+          </ul>
+        </div>
+        <div style="background:var(--bg);border-radius:6px;padding:12px">
+          <div style="font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Design Constraints</div>
+          <ul class="bullets">
+            <li>RPD left nav is <strong>hidden</strong> during transition state — prevents platform confusion</li>
+            <li>All exit paths (Save, Cancel, Back) must return to the exact ProDash origin page</li>
+            <li>Back without saving → RPD modal (using RPD Design System) confirms unsaved work loss</li>
+            <li>Shared Navigation pattern: TODO (still being defined)</li>
+          </ul>
+        </div>
+        <div style="background:var(--bg);border-radius:6px;padding:12px">
+          <div style="font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Eligibility &amp; Gating</div>
+          <ul class="bullets">
+            <li>Requires shared RDC customer auth between both platforms</li>
+            <li>Each RPD experience must be gated by product/group (RPD is team-focused today)</li>
+            <li><strong>Current scope:</strong> Agents on a team</li>
+            <li><strong>Future scope:</strong> All agents (solo + team)</li>
+            <li>Exceptions: deep SOC-compliance integrations (e.g. Salesforce) need separate scoping</li>
+          </ul>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <div style="font-size:11px;color:var(--mid)"><strong>Live examples:</strong> Select Seller Leads GA · Multi/Bulk Spotlight Listings</div>
+        <div style="font-size:11px;color:var(--mid)"><strong>Eng DRI:</strong> Gelan Almagro &nbsp;·&nbsp; <strong>Design DRI:</strong> Marivi Carlton</div>
+      </div>
+    </div>
+    <!-- END SEAMLESS TRANSITION -->
+
   </div>
 
   <!-- REALPRO APP -->
@@ -2735,7 +2779,7 @@
           <td><span class="dep-status q4">Q4 FY27</span></td>
           <td>Apr–Jun 2027</td>
           <td>RealPro Dashboard (UWP)</td>
-          <td>Core ProDash Alpha Q3, Beta Q4; full migration plan for C+, SPL, LEX clients in discovery</td>
+          <td>Core ProDash Alpha Q3, Beta Q4; full migration plan for C+, SPL, LEX clients in discovery. <strong>Interim:</strong> Seamless Transition pattern (shared auth, same-tab RPD injection) active now — new RPD experiences built once and surfaced in ProDash to prevent duplicate work. See RPD section.</td>
         </tr>
         <tr>
           <td><span class="dep-name">ALA (Adaptive Lead Allocation)</span></td>
