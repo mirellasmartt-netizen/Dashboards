@@ -154,6 +154,8 @@
   /* SECTION VISIBILITY */
   .section[data-tab] { display: none; }
   .section[data-tab].tab-visible { display: block; }
+  /* Offset sticky header (48px) + tab bar (40px) + 12px breathing room */
+  .section { scroll-margin-top: 100px; }
   /* SECTIONS */
   .section { margin-bottom: 40px; }
   .section-title {
@@ -3524,12 +3526,16 @@
     btn.addEventListener('click', () => activateTab(btn.dataset.tab));
   });
 
-  // ── Wire nav anchor clicks (smooth scroll without tab jump) ────────
+  // ── Wire nav anchor clicks (smooth scroll with header offset) ─────
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       const target = document.querySelector(link.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (target) {
+        const offset = 100; // 48px header + 40px tab bar + 12px breathing room
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
     });
   });
 
