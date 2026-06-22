@@ -69,6 +69,38 @@
     padding: 2px 8px;
     border-radius: 20px;
   }
+  /* TAB BAR */
+  .tab-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    position: sticky;
+    top: 48px;
+    z-index: 90;
+    height: 40px;
+    flex-shrink: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    padding: 0 16px;
+    height: 40px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    flex-shrink: 0;
+  }
+  .tab-btn:hover { color: var(--dark); }
+  .tab-btn.active { color: var(--red); border-bottom-color: var(--red); font-weight: 600; }
   /* LAYOUT */
   .layout {
     display: flex;
@@ -77,16 +109,18 @@
   /* NAV */
   .side-nav {
     position: sticky;
-    top: 48px;
-    height: calc(100vh - 48px);
-    width: 190px;
-    min-width: 190px;
+    top: 88px;
+    height: calc(100vh - 88px);
+    width: 180px;
+    min-width: 180px;
     background: var(--white);
     border-right: 1px solid var(--border);
     padding: 14px 0 20px;
     overflow-y: auto;
     flex-shrink: 0;
   }
+  .nav-group { display: none; }
+  .nav-group.active { display: block; }
   .nav-label {
     font-size: 9px;
     font-weight: 600;
@@ -117,6 +151,9 @@
     padding: 32px 40px 80px;
     max-width: 1100px;
   }
+  /* SECTION VISIBILITY */
+  .section[data-tab] { display: none; }
+  .section[data-tab].tab-visible { display: block; }
   /* SECTIONS */
   .section { margin-bottom: 40px; }
   .section-title {
@@ -510,48 +547,88 @@
   </div>
 </header>
 
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="strategy">Strategy</button>
+  <button class="tab-btn" data-tab="products">Products</button>
+  <button class="tab-btn" data-tab="surfaces">Surfaces</button>
+  <button class="tab-btn" data-tab="execution">Execution</button>
+  <button class="tab-btn" data-tab="newhomes">New Homes</button>
+  <button class="tab-btn" data-tab="reference">Reference</button>
+</div>
+
 <div class="layout">
 <nav class="side-nav">
-  <div class="nav-label">Overview</div>
-  <a class="nav-link" href="#northstar">North Star</a>
-  <a class="nav-link" href="#problem">The Problem</a>
-  <a class="nav-link" href="#competitive">Competitors</a>
-  <div class="nav-label">Products</div>
-  <a class="nav-link" href="#portfolio-matrix">Portfolio Matrix</a>
-  <a class="nav-link" href="#lead-models">Lead Models</a>
-  <a class="nav-link" href="#lead-types">Lead Types</a>
-  <a class="nav-link" href="#lead-allocation">Lead Allocation</a>
-  <a class="nav-link" href="#glossary">Product Glossary</a>
-  <a class="nav-link" href="#capabilities">3 Capabilities</a>
-  <a class="nav-link" href="#internal-tools">Internal Tools</a>
-  <div class="nav-label">Surfaces</div>
-  <a class="nav-link" href="#dashboard">RealPro Dashboard</a>
-  <a class="nav-link" href="#app">RealPro App</a>
-  <a class="nav-link" href="#store">Online Store</a>
-  <div class="nav-label">Design & UX</div>
-  <a class="nav-link" href="#ux-research">UX Research Insights</a>
-  <div class="nav-label">Foundation</div>
-  <a class="nav-link" href="#foundation">Foundation Enablers</a>
-  <div class="nav-label">Pricing</div>
-  <a class="nav-link" href="#skp">SKP Tier Bundles</a>
-  <div class="nav-label">New Homes</div>
-  <a class="nav-link" href="#nh-consumer">Consumer</a>
-  <a class="nav-link" href="#nh-builder">Builder Tools</a>
-  <a class="nav-link" href="#nh-data">Data Products</a>
-  <div class="nav-label">Reference</div>
-  <a class="nav-link" href="#workshop-decisions">Workshop Decisions</a>
-  <a class="nav-link" href="#glossary-terms">Term Glossary</a>
-  <a class="nav-link" href="#segments">Client Segments</a>
-  <a class="nav-link" href="#market-types">Market Types</a>
-  <a class="nav-link" href="#deprecations">Deprecation Tracker</a>
-  <a class="nav-link" href="#dri-map">DRI Map</a>
-  <a class="nav-link" href="#revenue-summary">Revenue Summary</a>
-  <div class="nav-label">Execution</div>
-  <a class="nav-link" href="#inflight">In-Flight Work</a>
-  <a class="nav-link" href="#timeline">FY27 Timeline</a>
-  <a class="nav-link" href="#teams">Team Ownership</a>
-  <a class="nav-link" href="#risks">Risks</a>
-  <a class="nav-link" href="#outcomes">Outcomes</a>
+
+  <!-- STRATEGY -->
+  <div class="nav-group active" data-tab-nav="strategy">
+    <div class="nav-label">Context</div>
+    <a class="nav-link" href="#northstar">North Star</a>
+    <a class="nav-link" href="#problem">The Problem</a>
+    <a class="nav-link" href="#competitive">Competitors</a>
+    <div class="nav-label">Direction</div>
+    <a class="nav-link" href="#workshop-decisions">Workshop Decisions</a>
+    <div class="nav-label">Results</div>
+    <a class="nav-link" href="#outcomes">Outcomes</a>
+    <a class="nav-link" href="#risks">Risks</a>
+    <a class="nav-link" href="#revenue-summary">Revenue Summary</a>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="nav-group" data-tab-nav="products">
+    <div class="nav-label">Portfolio</div>
+    <a class="nav-link" href="#portfolio-matrix">Portfolio Matrix</a>
+    <a class="nav-link" href="#glossary">Product Glossary</a>
+    <a class="nav-link" href="#capabilities">3 Capabilities</a>
+    <a class="nav-link" href="#internal-tools">Internal Tools</a>
+    <div class="nav-label">Lead System</div>
+    <a class="nav-link" href="#lead-models">Lead Models</a>
+    <a class="nav-link" href="#lead-types">Lead Types</a>
+    <a class="nav-link" href="#lead-allocation">Lead Allocation</a>
+  </div>
+
+  <!-- SURFACES -->
+  <div class="nav-group" data-tab-nav="surfaces">
+    <div class="nav-label">Surfaces</div>
+    <a class="nav-link" href="#dashboard">RealPro Dashboard</a>
+    <a class="nav-link" href="#app">RealPro App</a>
+    <a class="nav-link" href="#store">Online Store</a>
+    <div class="nav-label">Design & UX</div>
+    <a class="nav-link" href="#ux-research">UX Research</a>
+  </div>
+
+  <!-- EXECUTION -->
+  <div class="nav-group" data-tab-nav="execution">
+    <div class="nav-label">Now</div>
+    <a class="nav-link" href="#inflight">In-Flight Work</a>
+    <a class="nav-link" href="#timeline">FY27 Timeline</a>
+    <div class="nav-label">Team</div>
+    <a class="nav-link" href="#teams">Team Ownership</a>
+    <div class="nav-label">Platform</div>
+    <a class="nav-link" href="#foundation">Foundation Enablers</a>
+    <a class="nav-link" href="#skp">SKP Pricing Tiers</a>
+  </div>
+
+  <!-- NEW HOMES -->
+  <div class="nav-group" data-tab-nav="newhomes">
+    <div class="nav-label">New Homes</div>
+    <a class="nav-link" href="#nh-consumer">Consumer</a>
+    <a class="nav-link" href="#nh-builder">Builder Tools</a>
+    <a class="nav-link" href="#nh-data">Data Products</a>
+  </div>
+
+  <!-- REFERENCE -->
+  <div class="nav-group" data-tab-nav="reference">
+    <div class="nav-label">Glossaries</div>
+    <a class="nav-link" href="#glossary-terms">Term Glossary</a>
+    <a class="nav-link" href="#segments">Client Segments</a>
+    <a class="nav-link" href="#market-types">Market Types</a>
+    <div class="nav-label">Operations</div>
+    <a class="nav-link" href="#deprecations">Deprecation Tracker</a>
+    <a class="nav-link" href="#dri-map">DRI Map</a>
+    <a class="nav-link" href="#revenue-summary">Revenue Summary</a>
+  </div>
+
 </nav>
 
 <main class="main">
@@ -563,7 +640,7 @@
   </div>
 
   <!-- NORTH STAR -->
-  <div class="section" id="northstar">
+  <div class="section" id="northstar" data-tab="strategy">
     <div class="section-title">North Star</div>
     <div class="northstar">
       <div class="northstar-quote">"Realtor.com should be a growth engine — not merely a lead source."</div>
@@ -577,7 +654,7 @@
   </div>
 
   <!-- THE PROBLEM -->
-  <div class="section" id="problem">
+  <div class="section" id="problem" data-tab="strategy">
     <div class="section-title">The Problem — Why This Exists</div>
     <div class="metrics-row">
       <div class="metric-card">
@@ -599,7 +676,7 @@
   </div>
 
   <!-- COMPETITIVE -->
-  <div class="section" id="competitive">
+  <div class="section" id="competitive" data-tab="strategy">
     <div class="section-title">Competitive Landscape</div>
     <div class="cards-3">
       <div class="card accent-red">
@@ -633,7 +710,7 @@
   </div>
 
   <!-- PORTFOLIO MATRIX -->
-  <div class="section" id="portfolio-matrix">
+  <div class="section" id="portfolio-matrix" data-tab="products">
     <div class="section-title">Portfolio Matrix — Products by Audience & Type</div>
     <table class="matrix-table">
       <thead>
@@ -733,7 +810,7 @@
   </div>
 
   <!-- LEAD MODELS -->
-  <div class="section" id="lead-models">
+  <div class="section" id="lead-models" data-tab="products">
     <div class="section-title">Lead Models — How We Connect Consumers to Professionals</div>
     <div class="cards-3">
       <div class="model-card" style="border-left:3px solid var(--blue)">
@@ -772,7 +849,7 @@
   </div>
 
   <!-- LEAD TYPES -->
-  <div class="section" id="lead-types">
+  <div class="section" id="lead-types" data-tab="products">
     <div class="section-title">Lead &amp; Referral Types — Comparison by Product</div>
     <table class="lt-table">
       <thead>
@@ -891,7 +968,7 @@
   </div>
 
   <!-- LEAD ALLOCATION -->
-  <div class="section" id="lead-allocation">
+  <div class="section" id="lead-allocation" data-tab="products">
     <div class="section-title">Lead Allocation — How Leads Flow to Products</div>
     <div class="alloc-wrap">
       <div class="alloc-grid">
@@ -935,7 +1012,7 @@
   </div>
 
   <!-- INTERNAL TOOLS -->
-  <div class="section" id="internal-tools">
+  <div class="section" id="internal-tools" data-tab="products">
     <div class="section-title">Internal Tools — Supporting Operations</div>
     <div class="cards-3">
       <div class="tool-card" style="border-left:3px solid var(--red)">
@@ -990,7 +1067,7 @@
   </div>
 
   <!-- GLOSSARY -->
-  <div class="section" id="glossary">
+  <div class="section" id="glossary" data-tab="products">
     <div class="section-title">Product Glossary — What We Sell</div>
     <div class="cards-4">
       <div class="card accent-red">
@@ -1075,7 +1152,7 @@
   </div>
 
   <!-- CAPABILITIES -->
-  <div class="section" id="capabilities">
+  <div class="section" id="capabilities" data-tab="products">
     <div class="section-title">Three Enabling Capabilities</div>
     <div class="cards-3">
       <div class="cap-card" style="border-left:3px solid var(--purple)">
@@ -1126,7 +1203,7 @@
   </div>
 
   <!-- REALPRO DASHBOARD -->
-  <div class="section" id="dashboard">
+  <div class="section" id="dashboard" data-tab="surfaces">
     <div class="section-title">RealPro Dashboard — UWP (Unified Web Platform)</div>
     <div class="surface-wrap">
       <div class="surface-desc">Primary web-based launchpad for brokers, team leads, admins, and agents. The strategic surface connecting all products, insights, and tools into a single unified experience.</div>
@@ -1197,7 +1274,7 @@
   </div>
 
   <!-- REALPRO APP -->
-  <div class="section" id="app">
+  <div class="section" id="app" data-tab="surfaces">
     <div class="section-title">RealPro App — UMA (Unified Mobile App)</div>
     <div class="surface-wrap">
       <div class="surface-desc">The in-field companion for agents. Gives agents everything needed to win a lead the moment it arrives — profile ready, context loaded, training accessible.</div>
@@ -1260,7 +1337,7 @@
   </div>
 
   <!-- ONLINE STORE -->
-  <div class="section" id="store">
+  <div class="section" id="store" data-tab="surfaces">
     <div class="section-title">Online Store & Billing</div>
     <div class="surface-wrap">
       <div class="surface-desc">The self-serve growth engine — where clients discover, compare, and purchase products confidently without the sales team. Primary vehicle for growing attach rate and store revenue.</div>
@@ -1329,7 +1406,7 @@
   </div>
 
   <!-- TIMELINE -->
-  <div class="section" id="timeline">
+  <div class="section" id="timeline" data-tab="execution">
     <div class="section-title">FY27 Master Timeline — July 2026 to June 2027</div>
     <div class="tl-grid">
       <div class="tl-col">
@@ -1448,7 +1525,7 @@
   </div>
 
   <!-- UX RESEARCH -->
-  <div class="section" id="ux-research">
+  <div class="section" id="ux-research" data-tab="surfaces">
     <div class="section-title">Design Research &amp; UX Insights — RealPro Portfolio</div>
 
     <div class="ux-intro">
@@ -1636,7 +1713,7 @@
   </div>
 
   <!-- FOUNDATION ENABLERS -->
-  <div class="section" id="foundation">
+  <div class="section" id="foundation" data-tab="execution">
     <div class="section-title">Foundation Enablers — Platform Infrastructure FY27</div>
     <div class="cards-2" style="margin-bottom:12px">
       <div class="enabler-card" style="border-left:3px solid var(--red)">
@@ -1741,7 +1818,7 @@
   </div>
 
   <!-- SKP PRICING TIERS -->
-  <div class="section" id="skp">
+  <div class="section" id="skp" data-tab="execution">
     <div class="section-title">Pricing &amp; Packaging POC — Simon-Kucher Partners (SKP) Recommended Tiers</div>
     <div class="skp-note">⚠️ POC status — not yet live. Engaged Simon-Kucher Partners for 6 months to review pricing and bundling. Final recommendation delivered before holiday break. Working team is scoping a POC to pressure-test the model before full rollout.</div>
     <div class="tier-grid" style="margin-top:12px">
@@ -1821,7 +1898,7 @@
   </div>
 
   <!-- NEW HOMES: CONSUMER -->
-  <div class="section" id="nh-consumer">
+  <div class="section" id="nh-consumer" data-tab="newhomes">
     <div class="section-title">New Homes — Consumer</div>
     <div class="nh-summary">
       <div class="nh-summary-title">New Homes Consumer Strategy</div>
@@ -1891,7 +1968,7 @@
   </div>
 
   <!-- NEW HOMES: BUILDER TOOLS -->
-  <div class="section" id="nh-builder">
+  <div class="section" id="nh-builder" data-tab="newhomes">
     <div class="section-title">New Homes — Builder Tools &amp; Products</div>
     <div class="cards-2" style="margin-bottom:12px">
       <div class="nh-card" style="border-left:3px solid var(--purple)">
@@ -1951,7 +2028,7 @@
   </div>
 
   <!-- NEW HOMES: DATA -->
-  <div class="section" id="nh-data">
+  <div class="section" id="nh-data" data-tab="newhomes">
     <div class="section-title">New Homes — Market Intel Data Product</div>
     <div class="nh-summary">
       <div class="nh-summary-title">Three-Product Data Ecosystem — Unified in One Platform</div>
@@ -2026,7 +2103,7 @@
   </div>
 
   <!-- IN-FLIGHT WORK -->
-  <div class="section" id="inflight">
+  <div class="section" id="inflight" data-tab="execution">
     <div class="section-title">In-Flight Design Work — MVIP/RCC Migration</div>
 
     <div class="ux-intro" style="margin-bottom:16px">
@@ -2177,7 +2254,7 @@
   </div>
 
   <!-- TEAMS -->
-  <div class="section" id="teams">
+  <div class="section" id="teams" data-tab="execution">
     <div class="section-title">Team Ownership Model — Outcome Based</div>
     <div class="ux-intro" style="margin-bottom:16px">
       <div class="ux-intro-title">Reorg Context — Whitney Perez, Director of Product</div>
@@ -2241,7 +2318,7 @@
       </div>
     </div>
   </div>
-  <div class="section" id="risks">
+  <div class="section" id="risks" data-tab="strategy">
     <div class="section-title">Key Risks & Dependencies</div>
     <div class="cards-3">
       <div class="risk-card">
@@ -2281,7 +2358,7 @@
   </div>
 
   <!-- OUTCOMES -->
-  <div class="section" id="outcomes">
+  <div class="section" id="outcomes" data-tab="strategy">
     <div class="section-title">FY27 Target Outcomes — Strategic Alignment</div>
     <div class="cards-3" style="margin-bottom:12px">
       <div class="outcome-card" style="border-left:3px solid var(--purple)">
@@ -2362,7 +2439,7 @@
     </div>
   </div>
   <!-- WORKSHOP DECISIONS -->
-  <div class="section" id="workshop-decisions">
+  <div class="section" id="workshop-decisions" data-tab="strategy">
     <div class="section-title">FY27 Roadmap Workshop — Key Decisions &amp; Signals (Jun 16 2026)</div>
 
     <!-- CONTEXT STRIP -->
@@ -2616,7 +2693,7 @@
   </div>
 
   <!-- TERM GLOSSARY -->
-  <div class="section" id="glossary-terms">
+  <div class="section" id="glossary-terms" data-tab="reference">
     <div class="section-title">Term &amp; Acronym Glossary</div>
     <div class="term-grid">
       <div class="term-cell header">Acronym / Term</div>
@@ -2769,7 +2846,7 @@
   </div>
 
   <!-- CLIENT SEGMENTS -->
-  <div class="section" id="segments">
+  <div class="section" id="segments" data-tab="reference">
     <div class="section-title">Client Segment Definitions</div>
     <div class="cards-2" style="margin-bottom:12px">
       <div class="seg-card" style="border-left:3px solid var(--purple)">
@@ -2889,7 +2966,7 @@
   </div>
 
   <!-- MARKET TYPES -->
-  <div class="section" id="market-types">
+  <div class="section" id="market-types" data-tab="reference">
     <div class="section-title">Market Types — How RDC Classifies Lead Markets</div>
     <div class="cards-3" style="margin-bottom:12px">
       <div class="mkt-card" style="border-left:3px solid var(--purple)">
@@ -2955,7 +3032,7 @@
   </div>
 
   <!-- DEPRECATION TRACKER -->
-  <div class="section" id="deprecations">
+  <div class="section" id="deprecations" data-tab="reference">
     <div class="section-title">Deprecation Tracker — What's Being Sunset &amp; When</div>
     <table class="dep-table">
       <thead>
@@ -3050,7 +3127,7 @@
   </div>
 
   <!-- DRI MAP -->
-  <div class="section" id="dri-map">
+  <div class="section" id="dri-map" data-tab="reference">
     <div class="section-title">DRI Map — Who Owns What</div>
     <table class="dri-table">
       <thead>
@@ -3254,7 +3331,7 @@
   </div>
 
   <!-- REVENUE SUMMARY -->
-  <div class="section" id="revenue-summary">
+  <div class="section" id="revenue-summary" data-tab="strategy">
     <div class="section-title">FY27 Revenue Summary — Targets by Product</div>
     <table class="rev-table">
       <thead>
@@ -3385,18 +3462,89 @@
 </div><!-- end .layout -->
 
 <script>
-  const links = document.querySelectorAll('.nav-link');
-  const sections = document.querySelectorAll('.section');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
+  // ── Tab configuration ──────────────────────────────────────────────
+  const TAB_SECTIONS = {
+    strategy:  ['northstar','problem','competitive','workshop-decisions','outcomes','risks','revenue-summary'],
+    products:  ['portfolio-matrix','lead-models','lead-types','lead-allocation','glossary','capabilities','internal-tools'],
+    surfaces:  ['dashboard','app','store','ux-research'],
+    execution: ['inflight','timeline','teams','foundation','skp'],
+    newhomes:  ['nh-consumer','nh-builder','nh-data'],
+    reference: ['glossary-terms','segments','market-types','deprecations','dri-map','revenue-summary'],
+  };
+
+  let activeTab = 'strategy';
+  let observer = null;
+
+  function activateTab(tab) {
+    activeTab = tab;
+
+    // Update tab buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tab);
     });
-  }, { rootMargin: '-20% 0px -70% 0px' });
-  sections.forEach(s => observer.observe(s));
+
+    // Update nav groups
+    document.querySelectorAll('.nav-group').forEach(g => {
+      g.classList.toggle('active', g.dataset.tabNav === tab);
+    });
+
+    // Show/hide sections
+    document.querySelectorAll('.section[data-tab]').forEach(s => {
+      const inTab = TAB_SECTIONS[tab] && TAB_SECTIONS[tab].includes(s.id);
+      s.classList.toggle('tab-visible', inTab);
+    });
+
+    // Clear all nav active states
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+    // Scroll main to top
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Reconnect intersection observer for the visible sections
+    if (observer) observer.disconnect();
+    const visibleSections = (TAB_SECTIONS[tab] || [])
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.nav-group[data-tab-nav="${activeTab}"] .nav-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+
+    visibleSections.forEach(s => observer.observe(s));
+  }
+
+  // ── Wire tab buttons ───────────────────────────────────────────────
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+  });
+
+  // ── Wire nav anchor clicks (smooth scroll without tab jump) ────────
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // ── Handle URL hash on load (e.g. shared links) ────────────────────
+  function initFromHash() {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      for (const [tab, ids] of Object.entries(TAB_SECTIONS)) {
+        if (ids.includes(hash)) { activateTab(tab); return; }
+      }
+    }
+    activateTab('strategy');
+  }
+
+  initFromHash();
 </script>
 
 </body>
